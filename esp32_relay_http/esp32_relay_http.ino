@@ -1,8 +1,8 @@
 #include <WiFi.h>
 
 // Replace with your network credentials
-const char* ssid     = "******";  // Network SSID (name)
-const char* password = "******";  // Network password
+const char* ssid     = "**************";  // Network SSID (name)
+const char* password = "**************";  // Network password
 
 // Set web server port number to 80 (HTTP default)
 WiFiServer server(80);
@@ -34,19 +34,19 @@ const long timeoutTime = 2000;
 
 void setup() {
   Serial.begin(115200);
-  // Initialize the GPIO pins for the devices as outputs and set them to HIGH (NC state)
+  // Initialize the GPIO pins for the devices as outputs and set them to LOW
   pinMode(Device1, OUTPUT);
   pinMode(Device2, OUTPUT);
   pinMode(Device3, OUTPUT);
   pinMode(Device4, OUTPUT);
   pinMode(Device5, OUTPUT);
   pinMode(Device6, OUTPUT);
-  digitalWrite(Device1, HIGH);
-  digitalWrite(Device2, HIGH);
-  digitalWrite(Device3, HIGH);
-  digitalWrite(Device4, HIGH);
-  digitalWrite(Device5, HIGH);
-  digitalWrite(Device6, HIGH);
+  digitalWrite(Device1, LOW);
+  digitalWrite(Device2, LOW);
+  digitalWrite(Device3, LOW);
+  digitalWrite(Device4, LOW);
+  digitalWrite(Device5, LOW);
+  digitalWrite(Device6, LOW);
 
   // Connect to Wi-Fi network with SSID and password
   Serial.print("Connecting to ");
@@ -93,51 +93,51 @@ void loop() {
             if (header.indexOf("GET /1/on") >= 0) {
               Serial.println("Device 1 on");
               Device1State = "on";
-              digitalWrite(Device1, LOW);
+              digitalWrite(Device1, HIGH);
             } else if (header.indexOf("GET /1/off") >= 0) {
               Serial.println("Device 1 off");
               Device1State = "off";
-              digitalWrite(Device1, HIGH);
+              digitalWrite(Device1, LOW);
             } else if (header.indexOf("GET /2/on") >= 0) {
               Serial.println("Device 2 on");
               Device2State = "on";
-              digitalWrite(Device2, LOW);
+              digitalWrite(Device2, HIGH);
             } else if (header.indexOf("GET /2/off") >= 0) {
               Serial.println("Device 2 off");
               Device2State = "off";
-              digitalWrite(Device2, HIGH);
+              digitalWrite(Device2, LOW);
             } else if (header.indexOf("GET /3/on") >= 0) {
               Serial.println("Device 3 on");
               Device3State = "on";
-              digitalWrite(Device3, LOW);
+              digitalWrite(Device3, HIGH);
             } else if (header.indexOf("GET /3/off") >= 0) {
               Serial.println("Device 3 off");
               Device3State = "off";
-              digitalWrite(Device3, HIGH);
+              digitalWrite(Device3, LOW);
             } else if (header.indexOf("GET /4/on") >= 0) {
               Serial.println("Device 4 on");
               Device4State = "on";
-              digitalWrite(Device4, LOW);
+              digitalWrite(Device4, HIGH);
             } else if (header.indexOf("GET /4/off") >= 0) {
               Serial.println("Device 4 off");
               Device4State = "off";
-              digitalWrite(Device4, HIGH);
+              digitalWrite(Device4, LOW);
             } else if (header.indexOf("GET /5/on") >= 0) {
               Serial.println("Device 5 on");
               Device5State = "on";
-              digitalWrite(Device5, LOW);
+              digitalWrite(Device5, HIGH);
             } else if (header.indexOf("GET /5/off") >= 0) {
               Serial.println("Device 5 off");
               Device5State = "off";
-              digitalWrite(Device5, HIGH);
+              digitalWrite(Device5, LOW);
             } else if (header.indexOf("GET /6/on") >= 0) {
               Serial.println("Device 6 on");
               Device6State = "on";
-              digitalWrite(Device6, LOW);
+              digitalWrite(Device6, HIGH);
             } else if (header.indexOf("GET /6/off") >= 0) {
               Serial.println("Device 6 off");
               Device6State = "off";
-              digitalWrite(Device6, HIGH);
+              digitalWrite(Device6, LOW);
             }
 
             // Display the HTML web page
@@ -163,59 +163,60 @@ void loop() {
 
             // Display current state, and ON/OFF buttons for Relay 1
             client.println("<div class=\"device\"><p>Device 1 - State " + Device1State + "</p>");
-            if (Device1State == "on") {
-              client.println("<a href=\"/1/off\"><button class=\"button button-off\">OFF</button></a>");
-            } else {
+            if (Device1State == "off") {
               client.println("<a href=\"/1/on\"><button class=\"button button-on\">ON</button></a>");
+            } else {
+              client.println("<a href=\"/1/off\"><button class=\"button button-off\">OFF</button></a>");
             }
             client.println("</div>");
 
             // Display current state, and ON/OFF buttons for Relay 2
             client.println("<div class=\"device\"><p>Device 2 - State " + Device2State + "</p>");
-            if (Device2State == "on") {
-              client.println("<a href=\"/2/off\"><button class=\"button button-off\">OFF</button></a>");
-            } else {
+            if (Device2State == "off") {
               client.println("<a href=\"/2/on\"><button class=\"button button-on\">ON</button></a>");
+            } else {
+              client.println("<a href=\"/2/off\"><button class=\"button button-off\">OFF</button></a>");
             }
             client.println("</div>");
 
             // Display current state, and ON/OFF buttons for Relay 3
             client.println("<div class=\"device\"><p>Device 3 - State " + Device3State + "</p>");
-            if (Device3State == "on") {
-              client.println("<a href=\"/3/off\"><button class=\"button button-off\">OFF</button></a>");
-            } else {
+            if (Device3State == "off") {
               client.println("<a href=\"/3/on\"><button class=\"button button-on\">ON</button></a>");
+            } else {
+              client.println("<a href=\"/3/off\"><button class=\"button button-off\">OFF</button></a>");
             }
             client.println("</div>");
 
             // Display current state, and ON/OFF buttons for Relay 4
             client.println("<div class=\"device\"><p>Device 4 - State " + Device4State + "</p>");
-            if (Device4State == "on") {
-              client.println("<a href=\"/4/off\"><button class=\"button button-off\">OFF</button></a>");
-            } else {
+            if (Device4State == "off") {
               client.println("<a href=\"/4/on\"><button class=\"button button-on\">ON</button></a>");
+            } else {
+              client.println("<a href=\"/4/off\"><button class=\"button button-off\">OFF</button></a>");
             }
             client.println("</div>");
-
+            
             // Display current state, and ON/OFF buttons for Relay 5
             client.println("<div class=\"device\"><p>Device 5 - State " + Device5State + "</p>");
-            if (Device5State == "on") {
-              client.println("<a href=\"/5/off\"><button class=\"button button-off\">OFF</button></a>");
-            } else {
+            if (Device5State == "off") {
               client.println("<a href=\"/5/on\"><button class=\"button button-on\">ON</button></a>");
+            } else {
+              client.println("<a href=\"/5/off\"><button class=\"button button-off\">OFF</button></a>");
             }
             client.println("</div>");
 
             // Display current state, and ON/OFF buttons for Relay 6
             client.println("<div class=\"device\"><p>Device 6 - State " + Device6State + "</p>");
-            if (Device6State == "on") {
-              client.println("<a href=\"/6/off\"><button class=\"button button-off\">OFF</button></a>");
-            } else {
+            if (Device6State == "off") {
               client.println("<a href=\"/6/on\"><button class=\"button button-on\">ON</button></a>");
+            } else {
+              client.println("<a href=\"/6/off\"><button class=\"button button-off\">OFF</button></a>");
             }
             client.println("</div>");
 
             client.println("</body></html>");
+
             // The HTTP response ends with another blank line
             client.println();
             // Break out of the while loop
@@ -228,8 +229,9 @@ void loop() {
         }
       }
     }
-    // Close the connection
+    // Clear the header variable
     header = "";
+    // Close the connection
     client.stop();
     Serial.println("Client disconnected.");
     Serial.println("");
