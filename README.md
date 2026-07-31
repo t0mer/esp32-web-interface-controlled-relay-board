@@ -6,7 +6,7 @@ ON/OFF button per relay. State is kept in memory and reflected on the page.
 
 ## Web interface
 
-![Web interface](assets/screenshots/web-interface.png)
+![Web interface](https://raw.githubusercontent.com/t0mer/esp32-web-interface-controlled-relay-board/main/assets/screenshots/web-interface.png)
 
 Each card shows a device's current state and a button to toggle it. Buttons
 submit a `POST` request that is only accepted when it originates from the
